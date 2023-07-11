@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc"
@@ -11,5 +12,13 @@
   "license": "ISC",
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.2"
+  },
+  "devDependencies": {
+    "@types/googlemaps": "^3.43.3",
+    "common-js": "^0.3.8",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4"
   }
 }

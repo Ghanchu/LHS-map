@@ -4,9 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Longmont Housing Solution Interactive Map</title>
+    <link rel = "stylesheet" href = "styles.css">
 </head>
 <body>
-    <script src = ./build/index.js></script>
+    <script tpye = "module" src="build/index.js"></script>
+    
+
+    
     <div id = "map"></div>
+    <button id = "new_shape"><span id = "button-text-color">Create a new shape</span></button>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALYNlWRTEqN_lDNrs134QSgelyoiB9FqY&callback=initMap">
+    </script>
 </body>
 </html>
