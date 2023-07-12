@@ -3,13 +3,15 @@
     width: 100%;
 }
 
-#new_shape {
+#new_shape, #getAdress {
    
    border: 10px;
    margin-top: 10px;
    border-radius: 5px;
    
 }
+
+
 
 #button-text-color {
     color: green;
