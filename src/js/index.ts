@@ -121,33 +121,40 @@ function initMap() {
         const interval = 0.00005;
         for (let i = lowest; i < highest; i = i + interval) {
           for (let j = left; j < right; j = j + interval) {
-            if(google.maps.geometry.poly.containsLocation(
-              new google.maps.LatLng(i, j),
-              item
-            )) {
-              console.log('down here with ' + i + " " + j)
-              let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${i},${j}&key=${'AIzaSyALYNlWRTEqN_lDNrs134QSgelyoiB9FqY'}`
+            if (
+              google.maps.geometry.poly.containsLocation(
+                new google.maps.LatLng(i, j),
+                item
+              )
+            ) {
+              console.log("down here with " + i + " " + j);
+              let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${i},${j}&key=${"AIzaSyALYNlWRTEqN_lDNrs134QSgelyoiB9FqY"}`;
               fetch(url)
-              .then(response => response.json()).then(data => {
-                if(coordinates.get(data.results[0].formatted_address) == undefined) {
-                  coordinates.set(data.results[0].formatted_address, 1)
-                }
-                else {
-                  let meme = coordinates.get(data.results[0].formatted_address)
-                  if(meme) {
-                    coordinates.set(data.results[0].formatted_address, meme+1)
+                .then((response) => response.json())
+                .then((data) => {
+                  if (
+                    coordinates.get(data.results[0].formatted_address) ==
+                    undefined
+                  ) {
+                    coordinates.set(data.results[0].formatted_address, 1);
+                  } else {
+                    let meme = coordinates.get(
+                      data.results[0].formatted_address
+                    );
+                    if (meme) {
+                      coordinates.set(
+                        data.results[0].formatted_address,
+                        meme + 1
+                      );
+                    }
                   }
-                  
-                }
-                console.log(data.results[0].formatted_address)
-              })
-
+                  console.log(data.results[0].formatted_address);
+                });
             }
-            
           }
         }
       });
-      console.log(coordinates)
+      console.log(coordinates);
     };
   });
 }
