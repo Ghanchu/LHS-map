@@ -96,12 +96,11 @@ function initMap() {
 
     const gridpoints = document.getElementById("getAddress") as HTMLElement;
     gridpoints.addEventListener("click", () => {
-      console.log("this event listener is working");
-      generategridpoints(mainShape);
+      let coordinates = generategridpoints(mainShape);
+      console.log(coordinates);
     });
 
-    const generategridpoints = (current: Shape) => {
-      console.log("we are here");
+    const generategridpoints = (current: Shape): Map<string, number> => {
       let coordinates = new Map<string, number>();
       current.bermudaTriangles.forEach((item: google.maps.Polygon) => {
         let highest, lowest, left, right: number;
@@ -117,7 +116,7 @@ function initMap() {
         highest = latitudes[latitudes.length - 1];
         left = longitudes[0];
         right = longitudes[longitudes.length - 1];
-        console.log(highest, lowest, left, right);
+
         const interval = 0.00005;
         for (let i = lowest; i < highest; i = i + interval) {
           for (let j = left; j < right; j = j + interval) {
@@ -127,34 +126,34 @@ function initMap() {
                 item
               )
             ) {
-              console.log("down here with " + i + " " + j);
               let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${i},${j}&key=${"AIzaSyALYNlWRTEqN_lDNrs134QSgelyoiB9FqY"}`;
               fetch(url)
                 .then((response) => response.json())
                 .then((data) => {
-                  if (
-                    coordinates.get(data.results[0].formatted_address) ==
-                    undefined
-                  ) {
-                    coordinates.set(data.results[0].formatted_address, 1);
-                  } else {
-                    let meme = coordinates.get(
-                      data.results[0].formatted_address
-                    );
-                    if (meme) {
-                      coordinates.set(
-                        data.results[0].formatted_address,
-                        meme + 1
+                  if (data.results[0] != undefined) {
+                    if (
+                      coordinates.has(data.results[0].formatted_address) ==
+                      false
+                    ) {
+                      coordinates.set(data.results[0].formatted_address, 1);
+                    } else {
+                      let meme = coordinates.get(
+                        data.results[0].formatted_address
                       );
+                      if (meme) {
+                        coordinates.set(
+                          data.results[0].formatted_address,
+                          meme + 1
+                        );
+                      }
                     }
                   }
-                  console.log(data.results[0].formatted_address);
                 });
             }
           }
         }
       });
-      console.log(coordinates);
+      return coordinates;
     };
   });
 }
